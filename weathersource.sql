@@ -1,0 +1,34 @@
+-- get the postal code for Denver 
+select postal_code 
+from WEATHERSOURCE.ONPOINT_ID.SAMPLE_POSTAL_CODES
+where country = 'US'
+and (postal_code like '401%' or postal_code like '404%');
+
+select count(*)
+from TABLE(ONPOINT_ID.GET_HISTORY_DAY('00601', 'US'))
+where postal_code like '8020%';
+
+-- convert postal code query to VIEW
+CREATE DATABASE MARKETING;
+CREATE schema MARKETING.MAILERS;
+CREATE or REPLACE VIEW MARKETING.MAILERS.DENVER_ZIPS as
+SELECT
+    distinct postal_code 
+from WEATHERSOURCE.ONPOINT_ID.SAMPLE_POSTAL_CODES
+where country = 'US'
+and (postal_code like '401%' or postal_code like '404%');
+    
+SELECT * from MARKETING.MAILERS.DENVER_ZIPS;
+ -- 
+SELECT COUNT(*)
+FROM TABLE(WEATHERSOURCE.ONPOINT_ID.GET_HISTORY_DAY('48201', 'US'))
+WHERE DATE_VALID_STD BETWEEN '2023-01-01' AND '2023-12-31';
+
+
+SHOW USER FUNCTIONS LIKE 'GET_HISTORY_DAY';
+DESCRIBE FUNCTION WEATHERSOURCE.ONPOINT_ID.GET_HISTORY_DAY(VARCHAR, VARCHAR);
+
+
+ 
+
+
