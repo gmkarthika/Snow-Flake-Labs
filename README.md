@@ -8,3 +8,5 @@ Collaboration, Marketplace & Cost Estimation Workshop
 Data Application Builders Workshop
 
 Data Lake Workshop
+
+Data Engineering Workshop
